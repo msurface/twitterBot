@@ -1,15 +1,20 @@
 // requiring in twitter
 const Twitter = require('twitter');
+const dotenv = require('dotenv');
 
+// configure .env
+dotenv.config();
+// 
+console.log(process.env.CONSUMER_KEY);
 // setting up twitter tokens and keys
 const client = new Twitter({
-    consumer_key: 'pdDHB2OWQqOjJkNNlSjWrA5F1',
-    consumer_secret: 'JLOPMncpWLAfFT26HHT86C3jHzuEfUmVvgQq5njVriqMlR7xAG',
-    access_token_key: '1018606472073285632-yTbfl7KymI6jFrvl8K6ehcR5hpFGl5',
-    access_token_secret: 'fmuWFu5vdcQqZmY2Dn570ORs1ZKGdo3pZExnqmn89C0Jt',
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token_key: process.env.ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.ACCESS_SECRET,
 });
 
-client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+client.stream('statuses/filter', {track: 'sushi'}, function(stream) {
     stream.on('data', function(event) {
       console.log(event && event.text);
     });
